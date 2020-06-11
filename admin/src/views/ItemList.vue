@@ -5,6 +5,11 @@
       <el-table-column prop="_id" label="物品id" width="230"> </el-table-column>
 
       <el-table-column prop="name" label="物品名称"> </el-table-column>
+      <el-table-column prop="icon" label="图标">
+        <template slot-scope="scope">
+          <img :src="scope.row.icon" style="height:3rem;" alt="" />
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="$router.push(`/items/edit/${scope.row._id}`)">编辑</el-button>
