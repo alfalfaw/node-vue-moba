@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 
+// 将秘钥挂载在Express实例上,在真实项目中应该保存在环境变量
+app.set('secret', 'dahqoenrqnfsxi')
 // 跨域
 app.use(require('cors')())
 // 解析body数据

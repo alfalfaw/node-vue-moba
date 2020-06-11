@@ -6,7 +6,23 @@ import './style.css'
 Vue.config.productionTip = false
 
 import http from './plugins/axios'
+
 Vue.prototype.$http = http
+// 全局mixin可以在任意地方使用
+Vue.mixin({
+  computed: {
+    uploadUrl() {
+      return this.$http.defaults.baseURL + '/upload'
+    }
+  },
+  methods: {
+    getAuthHeaders() {
+      return {
+        Authorization: `Bearer ${localStorage.token || ''}`
+      }
+    }
+  }
+})
 new Vue({
   router,
   render: h => h(App)

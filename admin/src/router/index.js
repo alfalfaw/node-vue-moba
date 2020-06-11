@@ -14,9 +14,19 @@ import AdEdit from '../views/AdEdit'
 import AdList from '../views/AdList'
 import AdminUserEdit from '../views/AdminUserEdit'
 import AdminUserList from '../views/AdminUserList'
+import Login from '../views/Login'
+
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+    meta: {
+      isPublic: true
+    }
+  },
   {
     path: '/',
     name: 'Main',
@@ -109,6 +119,13 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !localStorage.token) {
+    return next('/login')
+  }
+  next()
 })
 
 export default router
