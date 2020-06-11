@@ -44,15 +44,14 @@ export default {
      * 添加或删除分类
      */
     async save() {
-      let res
       if (this.id) {
         // 编辑分类
-        res = await this.$http.put(`rest/categories/${this.id}`, this.model)
+        await this.$http.put(`rest/categories/${this.id}`, this.model)
       } else {
         // 添加分类
-        res = await this.$http.post('rest/categories', this.model)
+        await this.$http.post('rest/categories', this.model)
       }
-      console.log(res)
+
       this.$router.push('/categories/list')
       this.$message({
         type: 'success',
