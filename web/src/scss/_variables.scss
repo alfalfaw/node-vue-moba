@@ -4,12 +4,15 @@ $colors: (
   'info': #4b67af,
   'white': #fff,
   'light': #f9f9f9,
+  'light-1': #d4d9de,
   'grey-1': #999,
   'grey': #666,
   'dark-1': #342440,
   'dark': #222,
   'black': #000
 );
+// 边框颜色
+$border-color: map-get($colors, 'light-1');
 
 // font size
 // 按 alt+s 重新设置rem和px换算比例，alt+z 进行换算
