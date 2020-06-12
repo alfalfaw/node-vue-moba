@@ -5,4 +5,7 @@ module.exports = (app) => {
     useUnifiedTopology: true,
     useFindAndModify: false
   })
+
+  // 引用所有模型
+  require('require-all')(__dirname + '/../models')
 }

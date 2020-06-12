@@ -12,6 +12,8 @@ app.use(express.json())
 app.use('/uploads', express.static(__dirname + '/uploads'))
 // 导入admin的路由
 require('./routes/admin')(app)
+// 导入web路由
+require('./routes/web')(app)
 // mongo数据库
 require('./plugins/db')(app)
 app.listen(PORT, () => {

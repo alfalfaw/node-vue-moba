@@ -45,6 +45,15 @@ a {
     font-size: $size * $base-font-size;
   }
 }
+
+// text overflow
+
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 // width ,height
 .w-100 {
   width: 100%;
@@ -121,16 +130,4 @@ a {
   border-radius: 0.1538rem;
   font-size: map-get($font-sizes, 'sm') * $base-font-size;
   padding: 0.2rem 0.6rem;
-}
-
-// nav
-.nav {
-  .nav-item {
-    // 即使透明也要加边框，防止不对齐
-    border-bottom: 3px solid transparent;
-    padding-bottom: 0.2rem;
-    &.active {
-      border-bottom: 3px solid white;
-    }
-  }
 }

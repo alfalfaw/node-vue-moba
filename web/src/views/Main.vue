@@ -10,7 +10,7 @@
       <button type="button" class="btn bg-primary">立即下载</button>
     </div>
 
-    <div class="bg-primary pt-3 pb-2">
+    <div class="top-nav bg-primary pt-3 pb-2">
       <div class="nav d-flex text-white jc-around pb-1">
         <div class="nav-item active">
           <router-link tag="div" to="/">首页</router-link>
@@ -31,4 +31,23 @@
 export default {}
 </script>
 
-<style></style>
+<style lang="scss">
+@import '../assets/scss/variables';
+.top-nav {
+  .nav {
+    .nav-item {
+      // 即使透明也要加边框，防止不对齐
+      border-bottom: 3px solid transparent;
+      padding-bottom: 0.2rem;
+      &.active {
+        border-bottom: 3px solid white;
+      }
+    }
+  }
+}
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+</style>

@@ -27,11 +27,31 @@
         收起
       </div>
     </div>
+
+    <m-list-card title="新闻资讯" icon="news" :categories="newsCats">
+      <!-- 取插槽中的值用 # -->
+      <template #items="{ category }">
+        <div class="py-2 fs-lg d-flex" v-for="(news, index) in category.newsList" :key="index">
+          <span class="text-info">[{{ news.categoryName }}]</span>
+          <span class="px-2">|</span>
+          <span class="flex-1 text-dark text-ellipsis pr-2">{{ news.title }}</span>
+          <span class="text-grey-1 fs-sm">{{ news.createdAt | date }}</span>
+        </div>
+      </template>
+    </m-list-card>
   </div>
 </template>
 
 <script>
+import dayjs from 'dayjs'
+
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format('MM/DD')
+    }
+  },
+
   data() {
     return {
       swiperOptions: {
@@ -39,7 +59,18 @@ export default {
           el: '.pagination-home'
         }
         // Some Swiper option/callback...
-      }
+      },
+      // 新闻分类
+      newsCats: []
+    }
+  },
+  created() {
+    this.fetchNewsCats()
+  },
+  methods: {
+    async fetchNewsCats() {
+      const res = await this.$http.get('news/list')
+      this.newsCats = res.data
     }
   }
 }
