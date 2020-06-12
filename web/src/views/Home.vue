@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../scss/variables';
+@import '../assets/scss/variables';
 .pagination-home {
   .swiper-pagination-bullet {
     opacity: 1;

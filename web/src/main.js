@@ -3,7 +3,10 @@ import App from './App.vue'
 
 import router from './router'
 
-import './scss/style.scss'
+import './assets/scss/style.scss'
+
+// iconfont
+import './assets/iconfont/iconfont.css'
 
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 // import style
