@@ -6,6 +6,10 @@ const schema = new mongoose.Schema({
   avater: {
     type: String
   },
+  banner: {
+    type: String
+  },
+
   title: {
     type: String
   },
@@ -36,6 +40,12 @@ const schema = new mongoose.Schema({
         type: String
       },
       tips: {
+        type: String
+      },
+      cost: {
+        type: String
+      },
+      delay: {
         type: String
       }
     }

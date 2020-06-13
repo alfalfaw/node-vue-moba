@@ -3,7 +3,7 @@
     <h1>{{ id ? '编辑' : '新建' }}英雄</h1>
     <!-- 阻止表单提交后跳转 @submit.native.prevent -->
     <el-form label-width="120px" @submit.native.prevent="save">
-      <el-tabs type="border-card" value="skills">
+      <el-tabs type="border-card" value="basic">
         <el-tab-pane label="基本信息" name="basic">
           <el-form-item label="名称">
             <el-input v-model="model.name"></el-input>
@@ -17,13 +17,28 @@
               :action="uploadUrl"
               :headers="getAuthHeaders()"
               :show-file-list="false"
-              :on-success="handleAvatarSuccess"
+              :on-success="res => $set(model, 'avater', res.url)"
               :before-upload="beforeAvatarUpload"
             >
               <img v-if="model.avater" :src="model.avater" class="avatar" />
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
           </el-form-item>
+
+          <el-form-item label="背景">
+            <el-upload
+              class="avatar-uploader"
+              :action="uploadUrl"
+              :headers="getAuthHeaders()"
+              :show-file-list="false"
+              :on-success="res => $set(model, 'banner', res.url)"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="model.banner" :src="model.banner" class="avatar" />
+              <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+            </el-upload>
+          </el-form-item>
+
           <el-form-item label="类型">
             <!-- multiple 表示多选 -->
             <el-select v-model="model.categories" multiple>
@@ -87,6 +102,13 @@
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
+              <el-form-item label="冷却值">
+                <el-input v-model="item.delay"></el-input>
+              </el-form-item>
+              <el-form-item label="消耗">
+                <el-input v-model="item.cost"></el-input>
+              </el-form-item>
+
               <el-form-item label="描述">
                 <el-input v-model="item.description" type="textarea"></el-input>
               </el-form-item>
@@ -95,6 +117,27 @@
               </el-form-item>
               <el-form-item>
                 <el-button type="danger" size="small" @click="model.skills.splice(index, 1)">删除</el-button>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
+        <el-tab-pane label="最佳搭档" name="partners">
+          <el-button size="small" @click="model.partners.push({})"><i class="el-icon-plus"></i>添加搭档</el-button>
+          <el-row type="flex" style="flex-wrap:wrap;">
+            <el-col :md="12" v-for="(item, index) in model.partners" :key="index">
+              <el-form-item label="英雄">
+                <!-- filterable 可以筛选 -->
+                <el-select filterable v-model="item.hero">
+                  <el-option v-for="hero in heros" :key="hero._id" :value="hero._id" :label="hero.name"></el-option>
+                </el-select>
+              </el-form-item>
+
+              <el-form-item label="描述">
+                <el-input v-model="item.description" type="textarea"></el-input>
+              </el-form-item>
+
+              <el-form-item>
+                <el-button type="danger" size="small" @click="model.partners.splice(index, 1)">删除</el-button>
               </el-form-item>
             </el-col>
           </el-row>
@@ -116,11 +159,14 @@ export default {
   },
   data() {
     return {
+      heros: [],
       model: {
         name: '',
         avater: '',
+        banner: '',
         title: '',
         skills: [],
+        partners: [],
         // 如果数据是一个对象，取对象的值时为了避免出现undefined错误，先将其赋值为空对象
         scores: {
           diffcult: 0,
@@ -144,6 +190,9 @@ export default {
 
     // 获取物品
     this.fetchItems()
+
+    // 获取英雄
+    this.fetchHeros()
   },
   methods: {
     /**
@@ -179,6 +228,13 @@ export default {
       this.items = res.data
     },
     /**
+     * 获取英雄
+     */
+    async fetchHeros() {
+      const res = await this.$http.get(`rest/heros`)
+      this.heros = res.data
+    },
+    /**
      * 获取单个英雄数据
      */
     async fetch() {
@@ -190,13 +246,7 @@ export default {
     /**
      * to do 上传图片前验证
      */
-    beforeAvatarUpload() {},
-    /**
-     * 上传图片成功
-     */
-    async handleAvatarSuccess(res) {
-      this.model.avater = res.url
-    }
+    beforeAvatarUpload() {}
   }
 }
 </script>
