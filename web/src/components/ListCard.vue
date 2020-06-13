@@ -12,7 +12,7 @@
       </div>
     </div>
     <div>
-      <swiper ref="list" @slide-change="() => (active = $refs.list.$swiper.realIndex)">
+      <swiper :options="{ autoHeight: true }" ref="list" @slide-change="() => (active = $refs.list.$swiper.realIndex)">
         <swiper-slide v-for="(category, index) in categories" :key="index">
           <!-- 具名插槽 -->
           <slot name="items" :category="category"></slot>

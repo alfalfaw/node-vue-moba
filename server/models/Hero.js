@@ -75,4 +75,5 @@ const schema = new mongoose.Schema({
     }
   ]
 })
+// 加第三个参数可以指定数据表名
 module.exports = mongoose.model('Hero', schema)
