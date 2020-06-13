@@ -31,12 +31,18 @@
     <m-list-card title="新闻资讯" icon="news" :categories="newsCats">
       <!-- 取插槽中的值用 # -->
       <template #items="{ category }">
-        <div class="py-2 fs-lg d-flex" v-for="(news, index) in category.newsList" :key="index">
+        <router-link
+          :to="`/articles/${news._id}`"
+          tag="div"
+          class="py-2 fs-lg d-flex"
+          v-for="(news, index) in category.newsList"
+          :key="index"
+        >
           <span class="text-info">[{{ news.categoryName }}]</span>
           <span class="px-2">|</span>
           <span class="flex-1 text-dark text-ellipsis pr-2">{{ news.title }}</span>
           <span class="text-grey-1 fs-sm">{{ news.createdAt | date }}</span>
-        </div>
+        </router-link>
       </template>
     </m-list-card>
     <m-list-card title="英雄列表" icon="card-hero" :categories="heroCats">

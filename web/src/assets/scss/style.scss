@@ -20,7 +20,10 @@ body {
 a {
   color: #999;
 }
-
+// 行高一般使用em为单位
+p {
+  line-height: 1.5em;
+}
 @each $colorKey, $color in $colors {
   // text color
   .text-#{$colorKey} {
@@ -130,4 +133,11 @@ a {
   border-radius: 0.1538rem;
   font-size: map-get($font-sizes, 'sm') * $base-font-size;
   padding: 0.2rem 0.6rem;
+}
+
+// border
+@each $dir in (top, left, right, bottom) {
+  .border-#{$dir} {
+    border-#{$dir}: 1px solid $border-color;
+  }
 }
