@@ -68,7 +68,7 @@ module.exports = (app) => {
   app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
     const file = req.file
     // file.url = `http://localhost:3000/uploads/${file.filename}`
-    file.url = `https://moba.alfalfa.website:3000/uploads/${file.filename}`
+    file.url = `https://moba.alfalfa.website/uploads/${file.filename}`
     res.send(file)
   })
 
