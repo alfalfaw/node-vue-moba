@@ -62,8 +62,19 @@ module.exports = (app) => {
 
   // 上传图片
   const multer = require('multer')
+  const MAO = require('multer-aliyun-oss')
 
-  const upload = multer({ dest: __dirname + '/../../uploads' })
+  const upload = multer({
+    // dest: __dirname + '/../../uploads'
+    storage: MAO({
+      config: {
+        region: '<region>',
+        accessKeyId: '<accessKeyId>',
+        accessKeySecret: '<accessKeySecret>',
+        bucket: '<bucket>'
+      }
+    })
+  })
   // 该中间件将文件赋值到req.file
   app.post('/admin/api/upload', authMiddleware(), upload.single('file'), async (req, res) => {
     const file = req.file
