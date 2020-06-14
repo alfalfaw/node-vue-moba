@@ -10,6 +10,10 @@ app.use(require('cors')())
 app.use(express.json())
 // 托管静态文件
 app.use('/uploads', express.static(__dirname + '/uploads'))
+// 通过 /admin 访问
+app.use('/admin', express.static(__dirname + '/admin'))
+// 通过 / 访问
+app.use('/', express.static(__dirname + '/web'))
 // 导入admin的路由
 require('./routes/admin')(app)
 // 导入web路由
