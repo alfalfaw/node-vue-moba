@@ -1,10 +1,10 @@
 <template>
   <div class="page-article" v-if="model">
     <div class="d-flex py-3 px-2 ai-center border-bottom">
-      <div class="iconfont icon-back text-blue"></div>
+      <router-link to="/" tag="div" class="iconfont icon-back text-blue"></router-link>
       <strong class="flex-1 text-blue pl-2 text-ellipsis">{{ model.title }}</strong>
       <div class="text-grey fs-xs">
-        2020-5-19
+        {{ model.createdAt | date }}
       </div>
     </div>
     <div v-html="model.body" class="px-3 body"></div>
@@ -23,7 +23,13 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 export default {
+  filters: {
+    date(val) {
+      return dayjs(val).format('MM/DD')
+    }
+  },
   props: {
     id: { requires: true }
   },

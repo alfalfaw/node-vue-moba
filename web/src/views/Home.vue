@@ -16,15 +16,16 @@
     <div class="nav-icons bg-white mt-3 text-center  pt-3 text-grey">
       <div class="d-flex flex-wrap ">
         <!-- 注意不要同时设置元素上下的边距，应该设置元素一方边距配合父元素的的内边距,否则中间会出现边距叠加 -->
-        <div class="nav-item mb-3" v-for="n in 10" :key="n">
-          <i class="sprite sprite-news"> </i>
-          <div class="py-2">爆料站</div>
+        <div class="nav-item mb-3" v-for="entry in entries" :key="entry.name">
+          <i class="sprite" :class="'sprite-' + entry.icon"></i>
+          <div class="py-2">{{ entry.name }}</div>
         </div>
       </div>
 
       <div class="bg-light py-2 fs-sm d-flex ai-center jc-center">
-        <i class="sprite sprite-arrow mr-1"></i>
-        收起
+        <i v-if="isShowAll" class="sprite sprite-arrow-up mr-1"></i>
+        <i v-else class="sprite sprite-arrow-down mr-1"></i>
+        <span @click="isShowAll = !isShowAll">{{ isShowAll ? '收起' : '展开' }}</span>
       </div>
     </div>
 
@@ -75,19 +76,43 @@ export default {
       return dayjs(val).format('MM/DD')
     }
   },
-
+  computed: {
+    entries() {
+      if (this.isShowAll) {
+        return this.entry_list
+      }
+      return this.entry_list.slice(0, 4)
+    }
+  },
   data() {
     return {
       swiperOptions: {
+        observer: true, //修改swiper自己或子元素时，自动初始化swiper
+        observeParents: true, //修改swiper的父元素时，自动初始化swiper
+        loop: true,
+        autoplay: {
+          delay: 3000
+        },
         pagination: {
           el: '.pagination-home'
         }
         // Some Swiper option/callback...
       },
+
       // 新闻分类
       newsCats: [],
       // 英雄分类
-      heroCats: []
+      heroCats: [],
+      // 是否全部显示
+      isShowAll: false,
+      entry_list: [
+        { icon: 'news', name: '爆料站' },
+        { icon: 'stories', name: '故事站' },
+        { icon: 'mall', name: '周边商城' },
+        { icon: 'test', name: '体验服' },
+        { icon: 'new', name: '新人专区' },
+        { icon: 'honor', name: '荣耀·传承' }
+      ]
     }
   },
   created() {
@@ -137,11 +162,43 @@ export default {
   background-size: 28.8462rem;
   display: inline-block;
   &.sprite-news {
+    background-position: 63.546% 15.517%;
+    width: 1.7692rem;
+    height: 1.5385rem;
+  }
+  &.sprite-stories {
+    background-position: 90.483% 15.614%;
+    width: 1.7692rem;
+    height: 1.5385rem;
+  }
+  &.sprite-mall {
+    background-position: 36.746% 0.924%;
+    width: 1.4615rem;
+    height: 1.6923rem;
+  }
+
+  &.sprite-test {
+    background-position: 10.408% 15.517%;
+    width: 1.5385rem;
+    height: 1.5385rem;
+  }
+  &.sprite-new {
     background-position: 9.302% 0.813%;
     width: 2.3846rem;
     height: 1.9231rem;
   }
-  &.sprite-arrow {
+  &.sprite-honor {
+    background-position: 9.302% 0.813%;
+    width: 2.3846rem;
+    height: 1.9231rem;
+  }
+  &.sprite-arrow-up {
+    background-position: 38.577% 52.076%;
+    width: 0.7692rem;
+    height: 0.7692rem;
+  }
+  &.sprite-arrow-down {
+    transform: rotate(180deg);
     background-position: 38.577% 52.076%;
     width: 0.7692rem;
     height: 0.7692rem;
