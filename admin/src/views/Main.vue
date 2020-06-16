@@ -3,7 +3,7 @@
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-menu router unique-opened :default-active="$route.path">
         <el-submenu index="1">
-          <template slot="title"><i class="el-icon-message"></i>内容管理</template>
+          <template slot="title"><i class="el-icon-s-shop"></i>内容管理</template>
 
           <el-menu-item-group>
             <template slot="title">物品</template>
@@ -22,7 +22,7 @@
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-message"></i>运营管理</template>
+          <template slot="title"><i class="el-icon-s-promotion"></i>运营管理</template>
 
           <el-menu-item-group>
             <template slot="title">广告位</template>
@@ -31,7 +31,7 @@
           </el-menu-item-group>
         </el-submenu>
         <el-submenu index="3">
-          <template slot="title"><i class="el-icon-message"></i>系统设置</template>
+          <template slot="title"><i class="el-icon-s-operation"></i>系统设置</template>
           <el-menu-item-group>
             <template slot="title">分类</template>
             <el-menu-item index="/categories/create">新建分类</el-menu-item>
@@ -47,23 +47,35 @@
     </el-aside>
 
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>查看</el-dropdown-item>
-            <el-dropdown-item>新增</el-dropdown-item>
-            <el-dropdown-item>删除</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>王小虎</span>
+      <el-header style="font-size: 12px">
+        <div class="d-flex">
+          <h1>王者荣耀后台管理系统</h1>
+          <el-dropdown>
+            <i class="el-icon-setting" style="margin-right: 15px"></i>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
       </el-header>
 
       <el-main>
         <router-view :key="$route.path"></router-view>
       </el-main>
-    </el-container> </el-container
-></template>
+    </el-container>
+  </el-container>
+</template>
+
+<script>
+export default {
+  methods: {
+    logout() {
+      localStorage.token = ''
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
 
 <style>
 .el-header {
@@ -71,23 +83,14 @@
   color: #333;
   line-height: 60px;
 }
+.el-header > div {
+  display: flex;
+}
+.el-header > div h1 {
+  flex: 1;
+}
 
 .el-aside {
   color: #333;
 }
 </style>
-
-<script>
-export default {
-  data() {
-    const item = {
-      date: '2016-05-02',
-      name: '王小虎',
-      address: '上海市普陀区金沙江路 1518 弄'
-    }
-    return {
-      tableData: Array(20).fill(item)
-    }
-  }
-}
-</script>
