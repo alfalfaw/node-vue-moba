@@ -5,10 +5,10 @@
         <img class="w-100" src="https://ossweb-img.qq.com/upload/adw/image/20200612/b3d9f3b40ea5f3136adb87e05faaae63.png" alt="" />
       </swiper-slide>
       <swiper-slide>
-        <img class="w-100" src="https://ossweb-img.qq.com/upload/adw/image/20200612/b3d9f3b40ea5f3136adb87e05faaae63.png" alt="" />
+        <img class="w-100" src="https://ossweb-img.qq.com/upload/adw/image/20200613/bab185cd0bfe9beef6f1f44f6e59114f.jpeg" alt="" />
       </swiper-slide>
       <swiper-slide>
-        <img class="w-100" src="https://ossweb-img.qq.com/upload/adw/image/20200612/b3d9f3b40ea5f3136adb87e05faaae63.png" alt="" />
+        <img class="w-100" src="https://ossweb-img.qq.com/upload/adw/image/20200616/5c787a554dfa7a5aff0d6f5aacf0d953.jpeg" alt="" />
       </swiper-slide>
       <div class="swiper-pagination pagination-home text-right px-3 pb-1" slot="pagination"></div>
     </swiper>
