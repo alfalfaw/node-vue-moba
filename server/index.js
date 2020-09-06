@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const compression = require('compression')
 const PORT = process.env.PORT || 3000
 
 // 将秘钥挂载在Express实例上,在真实项目中应该保存在环境变量
@@ -8,6 +9,8 @@ app.set('secret', 'dahqoenrqnfsxi')
 app.use(require('cors')())
 // 解析body数据
 app.use(express.json())
+// 开启gzip压缩, 必须放到托管静态文件之前
+app.use(compression())
 // 托管静态文件
 app.use('/uploads', express.static(__dirname + '/uploads'))
 // 通过 /admin 访问
